@@ -1,0 +1,65 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.0.RELEASE' apply false
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE' apply false
+	id 'me.champeau.gradle.jmh' version "0.4.8" apply false
+	id 'com.github.johnrengelman.shadow' version '5.1.0' apply false
+}
+
+subprojects {
+	apply plugin: "com.github.johnrengelman.shadow"
+	apply plugin: "me.champeau.gradle.jmh"
+	apply plugin: 'java'
+	apply plugin: "io.spring.dependency-management"
+	apply plugin: "org.springframework.boot"
+
+	group = 'org.coinen.reactive.store'
+	version = '0.0.1-SNAPSHOT'
+	sourceCompatibility = '11'
+
+	repositories {
+		mavenCentral()
+		maven { url 'https://repo.spring.io/release' }
+		maven { url 'https://repo.spring.io/milestone' }
+	}
+
+
+	jmhJar {
+		exclude 'LICENSE'
+	}
+
+	jmh {
+		profilers = ['gc'] // Use profilers to collect additional data. Supported profilers: [cl, comp, gc, stack, perf, perfnorm, perfasm, xperf, xperfasm, hs_cl, hs_comp, hs_gc, hs_rt, hs_thr]
+		duplicateClassesStrategy = 'fail' // Strategy to apply when encountring duplicate classes during creation of the fat jar (i.e. while executing jmhJar task)
+	}
+
+	dependencies {
+		jmh 'org.openjdk.jmh:jmh-core:1.21'
+		jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.21'
+		implementation 'org.openjdk.jmh:jmh-core:1.21'
+		implementation 'org.openjdk.jmh:jmh-generator-annprocess:1.21'
+		implementation 'org.springframework.boot.experimental:spring-boot-starter-data-r2dbc'
+		implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+		implementation 'org.springframework.boot:spring-boot-starter-rsocket'
+		implementation 'org.springframework.boot:spring-boot-starter-security'
+		// Test Dependencies
+		testImplementation('org.springframework.boot:spring-boot-starter-test') {
+			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		}
+		testImplementation 'org.springframework.security:spring-security-test'
+		testImplementation 'org.springframework.boot.experimental:spring-boot-test-autoconfigure-r2dbc'
+		testImplementation 'io.projectreactor:reactor-test'
+	}
+
+
+
+	dependencyManagement {
+		imports {
+			mavenBom 'org.springframework.boot.experimental:spring-boot-bom-r2dbc:0.1.0.M2'
+		}
+	}
+
+	test {
+		useJUnitPlatform()
+	}
+
+}

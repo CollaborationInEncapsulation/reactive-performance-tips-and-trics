@@ -1,0 +1,6 @@
+rootProject.name = 'Reactive Store'
+
+include 'cart'
+include 'orders'
+include 'products'
+include 'users'
