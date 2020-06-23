@@ -1,0 +1,9 @@
+global:
+  scrape_interval: 1s
+scrape_configs:
+  - job_name: 'spring'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['130.61.30.40:8080', '130.61.30.40:8081',
+                  '130.61.30.40:8082', '130.61.30.40:8083',
+                  '130.61.30.40:8084', '130.61.30.40:8085']

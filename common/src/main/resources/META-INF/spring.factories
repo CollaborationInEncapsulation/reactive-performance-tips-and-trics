@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  org.coinen.reactive.store.exchange.InitializerConfiguration,\
+  org.coinen.reactive.store.exchange.R2dbcCustomConversionsConfiguration

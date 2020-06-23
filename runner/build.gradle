@@ -1,0 +1,16 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+  implementation project(':orders-idl')
+  implementation project(':orders-client')
+  implementation project(':exchange-idl')
+  implementation project(':exchange-client')
+  implementation project(':products-idl')
+  implementation project(':products-client')
+  implementation project(':payments-idl')
+  implementation project(':payments-client')
+  implementation project(':users-idl')
+  implementation project(':users-client')
+  implementation project(':cart-idl')
+  implementation project(':cart-client')
+}

@@ -1,0 +1,18 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+  implementation 'io.prometheus:simpleclient_pushgateway'
+  implementation 'io.r2dbc:r2dbc-postgresql'
+  implementation project(':common')
+  implementation project(':orders-idl')
+  implementation project(':exchange-idl')
+  implementation project(':exchange-client')
+  implementation project(':products-idl')
+  implementation project(':products-client')
+  implementation project(':payments-idl')
+  implementation project(':payments-client')
+  implementation project(':users-idl')
+  implementation project(':users-client')
+  implementation project(':cart-idl')
+  implementation project(':cart-client')
+}

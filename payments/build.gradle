@@ -1,0 +1,8 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+  implementation project(':common')
+  compile project(':payments-idl')
+  compile project(':orders-idl')
+  compile project(':orders-client')
+}
